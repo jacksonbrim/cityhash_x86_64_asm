@@ -1,4 +1,4 @@
-# CityHash64 x86_64 Assembly Implementation
+# x86_64 Assembly Implementation of [Google's CityHash algorithm](https://github.com/google/cityhash)
 A pure assembly implementation of the cityhash64 hashing algorithm made
 by [google](https://github.com/google/cityhash).
 
