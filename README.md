@@ -1,6 +1,8 @@
 # CityHash64 x86_64 Assembly Implementation
 A pure assembly implementation of the cityhash64 hashing algorithm made
 by [google](https://github.com/google/cityhash).
+
+
 Note:
 * Binary Currently only available on x86_64 linux systems due to linux
   specific syscalls for printing
@@ -39,14 +41,17 @@ sudo apt update sudo apt install build-essential
 
 Building the Project:
 
-Clone the repository: git clone https://github.com/jacksonbrim/cityhash_x86_64_asm.git cd cityhash_x86_64_asm
+Clone the repository: 
+```
+git clone https://github.com/jacksonbrim/cityhash_x86_64_asm.git cd cityhash_x86_64_asm
+```
 
 Build the executable and the .o files:
 The executable will be located in the out/ directory.
 ```
 make
 ```
-Clean up out/ and obj/
+Clean up ./out/ and ./obj/ directories.
 ```
 make clean
 ```
@@ -84,19 +89,24 @@ out/google_cityhash "hello world"
 To call from a cpp program:
 
 ```cpp
-extern "C" uint64 cityhash64(const char* s, size_t len);
+#include <cstring>
+#include <iostream>
+#include <cstdlib> // For std::atoi
+extern "C" uint64_t cityhash64(const char* s, size_t len);
 
-void main() {
-     const char* input = "Hello World!";
+int main() {
+    const char* input = "Hello World!";
 
-    uint64 cityhash64_asm_ge100 = cityhash64(input, 12);
-
+    uint64_t my_cityhash = cityhash64(input, 12);
+    std::cout << "cityhash64: 0x" << std::hex << my_cityhash << std::endl;
    
+    return 0;
 }
 ```
 Link the .o file
 ```
 g++ -o myProgram main.cpp /path/to/cityhash_x86_64_asm/obj/city_hash.o
+/path/to/cityhash_x86_64_asm/obj/hashing_utils/*
 ```
 
 
